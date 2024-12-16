@@ -10,7 +10,7 @@
   <properties>
     <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <gatling.version>${project.version}</gatling.version>
+    <gatling.version>3.7.6</gatling.version>
     <gatling-maven-plugin.version>4.11.0</gatling-maven-plugin.version>
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
@@ -24,6 +24,36 @@
       <version>${gatling.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.gatling</groupId>
+      <artifactId>gatling-app</artifactId>
+      <version>${gatling.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.gatling</groupId>
+      <artifactId>gatling-recorder</artifactId>
+      <version>${gatling.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.tomakehurst</groupId>
+      <artifactId>wiremock-jre8</artifactId>
+      <version>2.31.0</version>
+      <scope>test</scope>
+    </dependency>
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>4.13.2</version>
+          <scope>test</scope>
+      </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -31,6 +61,10 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${maven.compiler.release}</source>
+          <target>${maven.compiler.release}</target>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
@@ -45,8 +79,16 @@
         <artifactId>gatling-maven-plugin</artifactId>
         <version>${gatling-maven-plugin.version}</version>
         <configuration>
-          <!-- Enterprise Cloud (https://cloud.gatling.io/) configuration reference: https://docs.gatling.io/reference/integrations/build-tools/maven-plugin/#running-your-simulations-on-gatling-enterprise-cloud -->
+          <resultsFolder>target/gatling</resultsFolder>
+          <runMultipleSimulations>true</runMultipleSimulations>
         </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

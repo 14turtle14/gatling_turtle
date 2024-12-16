@@ -1,0 +1,6 @@
+{
+  "clientId": "#{clientId}",
+  "name": "#{name}",
+  "surname": "#{surname}",
+  "creationDate" : "#{creationDate}"
+}

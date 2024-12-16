@@ -1,0 +1,8 @@
+{
+  "clientId": "#{clientId}",
+  "name": "#{name}",
+  "surname": "#{surname}",
+  "productId": "#{productId}",
+  "quantity": "#{quantity}",
+  "creationDate" : "#{creationDate}"
+}

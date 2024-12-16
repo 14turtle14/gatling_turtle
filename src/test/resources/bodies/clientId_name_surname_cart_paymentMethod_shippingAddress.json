@@ -1,0 +1,9 @@
+{
+  "clientId": "#{clientId}",
+  "name": "#{name}",
+  "surname": "#{surname}",
+  "cart": "#{cart}",
+  "paymentMethod": "#{paymentMethod}",
+  "shippingAddress": "#{shippingAddress}",
+  "creationDate" : "#{creationDate}"
+}

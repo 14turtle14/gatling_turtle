@@ -5,6 +5,10 @@ pipeline {
         MAVEN_HOME = tool 'Maven'
     }
 
+    options {
+        timeout(time: 15, unit: 'MINUTES')
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -14,14 +18,14 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh "${MAVEN_HOME}/bin/mvn clean test -Dtest=GatlingWithWireMock"
+                    sh "${MAVEN_HOME}/bin/mvn clean package"
                 }
             }
         }
         stage('Test') {
             steps {
                 script {
-                    sh "${MAVEN_HOME}/bin/mvn gatling:test"
+                    sh "${MAVEN_HOME}/bin/mvn exec:java -Dexec.mainClass=gatling_exec.Executor"
                 }
             }
         }
@@ -30,7 +34,7 @@ pipeline {
     post {
         always {
             script {
-                sh "${MAVEN_HOME}/bin/mvn clean test -Dtest=GatlingWithWireMock -DstopWireMock=true"
+                sh "${MAVEN_HOME}/bin/mvn exec:java -Dexec.mainClass=gatling_exec.Executor -Dexec.args=stop"
             }
         }
     }

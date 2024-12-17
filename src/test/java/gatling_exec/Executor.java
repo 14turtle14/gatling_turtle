@@ -6,6 +6,7 @@ import io.gatling.core.config.GatlingPropertiesBuilder;
 
 public class Executor {
     public static void main(String[] args) {
+
         WireMockSetup.startWireMock();
 
         GatlingPropertiesBuilder props = new GatlingPropertiesBuilder()

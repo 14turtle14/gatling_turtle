@@ -25,7 +25,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh "${MAVEN_HOME}/bin/mvn exec:java -Dexec.mainClass=gatling_exec.Executor"
+                    sh "${MAVEN_HOME}/bin/mvn test -Dtest=gatling_exec.Executor"
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
     post {
         always {
             script {
-                sh "${MAVEN_HOME}/bin/mvn exec:java -Dexec.mainClass=gatling_exec.Executor -Dexec.args=stop"
+                sh "${MAVEN_HOME}/bin/mvn test -Dtest=gatling_exec.Executor -Dexec.args=stop"
             }
         }
     }

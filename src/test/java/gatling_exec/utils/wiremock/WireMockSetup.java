@@ -57,7 +57,6 @@ public class WireMockSetup {
                 .withRequestBody(matchingJsonPath("$.clientId"))
                 .withRequestBody(matchingJsonPath("$.name"))
                 .withRequestBody(matchingJsonPath("$.surname"))
-                .withRequestBody(matchingJsonPath("$.cart"))
                 .withRequestBody(matchingJsonPath("$.paymentMethod"))
                 .withRequestBody(matchingJsonPath("$.shippingAddress"))
                 .willReturn(aResponse()
@@ -99,7 +98,7 @@ public class WireMockSetup {
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\"orderId\": 12345, \"shippingStatus\": \"shipped\"}")));
+                        .withBody("{\"orderId\": 12345, \"status\": \"shipped\"}")));
 
         stubFor(post(urlEqualTo("/order/12345/return"))
                 .withRequestBody(matchingJsonPath("$.clientId"))
@@ -108,7 +107,7 @@ public class WireMockSetup {
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\"orderId\": 12345, \"returnStatus\": \"returned\"}")));
+                        .withBody("{\"orderId\": 12345, \"status\": \"returned\"}")));
     }
 
     public static void stopWireMock() {

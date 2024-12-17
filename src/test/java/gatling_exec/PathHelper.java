@@ -16,14 +16,14 @@ public class PathHelper {
 
     static {
         try {
-            Path projectRootDir = Paths.get(requireNonNull(PathHelper.class.getResource("gatling.conf"), "Couldn't locate gatling.conf").toURI()).getParent().getParent().getParent();
+            Path projectRootDir = Paths.get(requireNonNull(PathHelper.class.getResource("/gatling.conf"), "Couldn't locate gatling.conf").toURI()).getParent().getParent().getParent();
             Path mavenTargetDirectory = projectRootDir.resolve("target");
             Path mavenSrcTestDirectory = projectRootDir.resolve("src").resolve("test");
 
             mavenSourcesDirectory = mavenSrcTestDirectory.resolve("java");
-            mavenResourcesDirectory = mavenSrcTestDirectory.resolve("");
+            mavenResourcesDirectory = mavenSrcTestDirectory.resolve("resources");
             mavenBinariesDirectory = mavenTargetDirectory.resolve("test-classes");
-            resultsDirectory = mavenTargetDirectory.resolve("recorder.conf");
+            resultsDirectory = mavenTargetDirectory.resolve("gatling.conf");
             recorderConfigFile = mavenResourcesDirectory.resolve("recorder.conf");
         } catch (URISyntaxException e) {
             throw new ExceptionInInitializerError(e);

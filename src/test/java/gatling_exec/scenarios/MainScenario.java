@@ -9,8 +9,6 @@ import java.time.Duration;
 import java.util.Calendar;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
-import static org.eclipse.jetty.webapp.MetaDataComplete.False;
-import static org.eclipse.jetty.webapp.MetaDataComplete.True;
 
 public class MainScenario {
 
@@ -19,7 +17,7 @@ public class MainScenario {
                     pace(Duration.ofMinutes(2), Duration.ofMinutes(2).plus(Duration.ofSeconds(30)))
                             .group("Authorization").on(
                                     exec(GatlingHelper.authorization)
-                                            .exec(session -> session.set("employee", False))
+                                            .exec(session -> session.set("employee", false))
                                             .pause(Duration.ofSeconds(1), Duration.ofSeconds(2))
                             )
                             .group("MainActions").on(
@@ -50,11 +48,11 @@ public class MainScenario {
                                                                     .exec(MainScenarioActions.cart)
                                                                     .pause(Duration.ofSeconds(1), Duration.ofSeconds(2))
                                                                     .exec(MainScenarioActions.cart)
-                                                                    .exec(session -> session.set("employee", True)
+                                                                    .exec(session -> session.set("employee", true)
                                                                     )
                                                     )
                                             )
-                                            .doIfEqualsOrElse(session -> session.getBoolean("employee"), True).then(
+                                            .doIfEqualsOrElse(session -> session.getBoolean("employee"), true).then(
                                                     repeat(4).on(
                                                             exec(MainScenarioActions.products, MainScenarioActions.orders)
                                                     )

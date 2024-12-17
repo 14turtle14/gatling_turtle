@@ -12,14 +12,14 @@ public class MainScenarioActions {
             .exec(http("Products")
                     .post("/products")
                     .body(ElFileBody("bodies/name_surname_clientId.json")).asJson()
-                    .check(jsonPath("$.id").exists().saveAs("productId"))
+                    .check(jsonPath("$..id").exists().saveAs("productId"))
             );
 
     public static final ChainBuilder cart = CoreDsl
             .exec(http("Cart")
                     .post("/cart")
                     .body(ElFileBody("bodies/name_surname_clientId.json")).asJson()
-                    .check(jsonPath("$.cart").exists().saveAs("cart"))
+                    .check(jsonPath("$.cart").saveAs("cart"))
             );
 
     public static final ChainBuilder orders = CoreDsl
@@ -34,13 +34,6 @@ public class MainScenarioActions {
                     .post("/cart/add")
                     .body(ElFileBody("bodies/name_surname_clientId_productId_quantity.json")).asJson()
                     .check(jsonPath("$.message").is("Product added to cart"))
-            );
-
-    public static final ChainBuilder getOrder = CoreDsl
-            .exec(http("GetOrder")
-                    .post("/order/#{orderId}")
-                    .body(ElFileBody("bodies/name_surname_clientId.json")).asJson()
-                    .check(jsonPath("$.orderId").saveAs("oderId"))
             );
 
     public static final ChainBuilder createOrder = CoreDsl
@@ -59,7 +52,7 @@ public class MainScenarioActions {
                     .body(ElFileBody("bodies/name_surname_clientId.json")).asJson()
                     .check(
                             jsonPath("$.orderId").saveAs("oderId"),
-                            jsonPath("$.status").is("canceled")
+                            jsonPath("$.status").is("cancelled")
                     )
             );
 

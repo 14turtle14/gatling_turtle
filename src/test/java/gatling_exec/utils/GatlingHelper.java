@@ -21,10 +21,10 @@ import static io.gatling.javaapi.core.CoreDsl.exec;
 public class GatlingHelper {
     public static final Iterator<Map<String, Object>> feeder =
             Stream.generate((Supplier<Map<String, Object>>) () -> Map.of(
-                            "clientId", String.format("1%014d", (ThreadLocalRandom.current().nextInt(10001, 200000))),
+                            "clientId", String.format("1%07d", (ThreadLocalRandom.current().nextInt(10001, 200000))),
                             "creationDate", createDate(Calendar.DATE, -1),
-                            "randomName", generateRandomName(6),
-                            "randomSurname", generateRandomSurname(10),
+                            "name", generateRandomName(6),
+                            "surname", generateRandomSurname(10),
                             "shippingAddress", "Vavilova k. 3"
                     )
             ).iterator();
@@ -55,7 +55,7 @@ public class GatlingHelper {
             .exec(AuthorizationAction.authorization)
             .randomSwitch().on(
                     new Choice.WithWeight(29, exec(session -> session.set("paymentMethod", "CARD"))),
-                    new Choice.WithWeight(29, exec(session -> session.set("paymemtMethod", "CASH"))),
+                    new Choice.WithWeight(29, exec(session -> session.set("paymentMethod", "CASH"))),
                     new Choice.WithWeight(29, exec(session -> session.set("paymentMethod", "SBP"))),
                     new Choice.WithWeight(10, exec(session -> session.set("paymentMethod", "ATM"))),
                     new Choice.WithWeight(2, exec(session -> session.set("paymentMethod", "NOTHING")))

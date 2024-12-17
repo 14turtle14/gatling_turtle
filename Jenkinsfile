@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/14turtle14/gatling_turtle.git'
+                git 'https://github.com/your-repo/your-project.git'
             }
         }
         stage('Build') {

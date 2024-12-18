@@ -25,7 +25,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh "${MAVEN_HOME}/bin/mvn test -Dtest=gatling_exec.ExecutorTest.runGatlingTest -Dgatling.core.runDescription=AutomatedTestRun"
+                    sh "${MAVEN_HOME}/bin/mvn test -Dtest=gatling_exec.ExecutorTest#runGatlingTest -Dgatling.core.runDescription=AutomatedTestRun"
                 }
             }
         }

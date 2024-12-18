@@ -6,7 +6,7 @@ pipeline {
     }
 
     options {
-        timeout(time: 20, unit: 'MINUTES')
+        timeout(time: 15, unit: 'MINUTES')
     }
 
     stages {
@@ -25,7 +25,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh "${MAVEN_HOME}/bin/mvn test -Dtest=gatling_exec.ExecutorTest#runGatlingTest"
+                    sh "${MAVEN_HOME}/bin/mvn test -Dtest=gatling_exec.ExecutorTest.runGatlingTest -Dgatling.core.runDescription=AutomatedTestRun"
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
     post {
         always {
             script {
-                sh "${MAVEN_HOME}/bin/mvn exec:java -Dexec.mainClass=gatling_exec.ExecutorTest -Dexec.args=stop"
+                sh "${MAVEN_HOME}/bin/mvn exec:java -Dexec.mainClass=gatling_exec.Executor -Dexec.args=stop"
             }
         }
     }

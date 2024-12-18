@@ -86,8 +86,8 @@
         <version>${gatling-maven-plugin.version}</version>
         <configuration>
           <resultsFolder>target/gatling</resultsFolder>
-          <runMultipleSimulations>true</runMultipleSimulations>
-          <runDescription>Automated Test Run</runDescription>
+          <runMultipleSimulations>false</runMultipleSimulations>
+          <runDescription>AutomatedTestRun</runDescription>
         </configuration>
         <executions>
           <execution>
